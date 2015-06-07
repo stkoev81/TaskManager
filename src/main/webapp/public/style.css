@@ -1,0 +1,146 @@
+/* classes starting with style_ are used only for the purpose of styling. 
+ * Other classes are used first and foremost for finding things, and may 
+ * also be used for styling. 
+ * */
+
+div{
+	border-width:1px;
+	border-style: none;
+}
+
+
+body {
+/* 	font-family: sans-serif; */
+	font-family: serif;
+	font-style: normal;
+	font-variant:normal;
+	font-size: 16px;
+    margin: 0;
+    padding: 5px;
+    background-color:#DEDEDE;
+}
+
+.style_displayTable {
+	display : table;
+}
+
+.style_displayInline {
+	display : inline;
+}
+
+.style_displayBlock {
+	display : block;
+}
+
+.style_displayTableCell{
+	display: table-cell;
+}
+.style_displayTableRow{
+	display: table-row;
+}
+.style_displayTableColumn{
+	display: table-column;
+}
+
+
+.style_hidden {
+	display:none;	
+}
+
+.style_clear{
+	clear:both;
+}
+
+input[type="text"],input[type="password"] {
+	width:150px;
+}
+textarea{
+	font-family: serif;
+	font-size: 16px;
+}
+
+.weekWrapper{
+	border-style:solid;
+}
+.weekWrapper .horizontalGrid{
+	border-style:solid none none none;
+}
+.weekWrapper .week{
+	
+}
+.weekWrapper .verticalGrid{
+	border-style:none none none solid;
+}
+.weekWrapper .header{
+	
+}
+.weekWrapper .dayLabel{
+	border-style:none none solid none;
+}
+.weekWrapper .allDayBox{
+	
+}
+.weekWrapper .hourlyBox{
+	
+}
+
+.selectedSub .month {
+	border-style: solid solid solid none;
+}
+
+.month .monthLabel{
+	border-style: none none none solid;
+}
+
+.month .header{
+	border-style:solid none none none;
+	
+}
+.month .dowLabel{
+	border-style:none none none solid;
+}
+.month .monthBox{
+	
+}
+.month .dayBox{
+	 border-style:solid none none solid;
+}
+.month .dayLabel{
+	
+}
+
+.task{
+	border-style:solid ;
+	border-width:1px;
+	background-color:yellow;
+	overflow:hidden;
+/* 	padding: 0 3px 0 3px;  */
+}
+
+.overflowTasks{
+	border-style:solid ;
+	border-width:1px;
+	background-color:red;
+	overflow:hidden;
+}
+
+.style_currentDate{
+	background-color: darkseagreen;
+	opacity:0.7; 
+}
+
+.style_notCurrentMonth{
+	background-color: grey;
+	opacity:0.7; 
+}
+
+
+.style_dragging{
+	z-index : 1; 
+	background-color : gold; 
+}
+
+
+
+
+

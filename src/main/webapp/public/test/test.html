@@ -1,0 +1,59 @@
+<!-- A page that shows the results of all automated js tests -->
+
+<html>
+<head>
+	<script src="../lib/jquery.js"></script>
+	<script src="../lib/tmaSetup.js"></script>
+	<script src="../dev/js/common/common.js"></script>
+	<script src="lib/tmaTestUtil.js"></script>
+	<script src="tests.js"></script>
+</head>
+
+
+<body>
+
+<div id="tests">
+</div>
+
+<script>
+var keys = [];
+for (var key in tma.tests){
+	keys.push(key);
+}
+
+
+
+var i = 0; 
+var passed = 0; 
+var failed = 0; 
+for (var key in tma.tests){
+	i++;
+	var result = 'pass';
+	$("#tests").append("---------------- Starting test #" + i + " of " + keys.length + ": " + key + " --------------<br/>");
+	try{
+		tma.tests[key]();
+		passed ++;
+	}
+	catch (e){
+		console.error(">> failure in test " + key);
+		console.error(e);
+		result = 'fail';
+		failed ++;
+	}
+	
+	$("#tests").append("---------------- Ending test #" + i + " of " + keys.length + ": " + key + ". Result: " + result +" --------------<br/>");
+}
+
+
+$("#tests").append("---------------- Summary of tests: passed " + passed + ", failed " + failed + "--------------<br/>");
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

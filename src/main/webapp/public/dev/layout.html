@@ -1,0 +1,226 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="../style.css"/>
+	<link rel="stylesheet" type="text/css" href="../lib/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="../lib/jquery-ui-custom.css"/>
+	<title>Calendar</title>
+</head>
+
+<body>
+<!-- this contains:  placeholders and styles/dimensions. Non onclicks, no logic. -->
+
+	<div class="root" style="position:relative;"></div>
+	
+	<div class="app style_hidden">
+		<div class='footer' style='text-align:center;'> Sample online calendar (see <a href='http://www.skoev.com' target="_new">www.skoev.com</a> for details) </div>
+		<div class='navbar' style='float:left'></div>
+		<div class ="style_clear"></div>
+		<div class='page'></div>
+		<div class = 'message' style="position:relative"></div>
+	</div>
+
+	<div class='app_message style_hidden'>
+		<div class="blocker style_hidden" style="width:100%;height:100%;position:fixed;left:0;top:0;opacity:0.7;background-color:white;"></div>
+		 
+		<div class="error style_hidden" style="background-color:#DB4D4D;position:fixed;padding:5px"> 
+			<div style='text-align:center;'>Error!</div>  
+			<div class ='contents' style='text-align: center;min-width:200px;min-height:1px'></div>
+			<div style='text-align: right;'><button class = 'ack' style='margin-top:20px'>OK</button></div>
+		</div>
+	
+		<div class="alert  style_hidden" style="background-color:#99FF66;position:fixed;padding:5px"> 
+			<div class ='contents' style="text-align: center;min-width:200px;min-height:1px"></div>
+			<div style='text-align:right;'><button class = 'ack' style='margin-top:20px'>OK</button></div>
+		</div>
+	
+	
+		<div class="notification  style_hidden" style="background-color:#99FF66;position:fixed;padding:5px"> 
+			<div class ='contents' style="text-align: center;min-width:200px;min-height:1px"></div>
+		</div>
+	</div>
+	
+	<div class='app_navbar style_hidden'>
+		<div class='selector'>
+			<button class="cal">Main</button>
+			<button class="myAccount">My account</button>
+			<button class="login">Log out</button> 
+		</div>
+	</div>
+
+
+	<div class="app_cal style_hidden" style="min-height:100%;min-width:1024px;margin:auto">
+		<div class="leftSide" style="float:left;"></div>
+		<div class= "rightSide" style="float:right;width:100%;">
+			<div class="viewSelector" style="float:right;margin: 0 30% 0 0; ">
+				<button class="day">Day</button>
+				<button class="week">Week</button>
+				<button class="fourDay">4 day</button>
+				<button class="month">Month</button>
+			</div>
+			<div class="paging" style="float:right;margin:0 30% 0 0; ">
+				<button class="next">Next</button>
+				<button class="previous">Previous</button>
+				<button class="now">Now</button>
+			</div>
+			<div class ="style_clear"></div>
+			<div class="tasks" style='position:relative'>
+				<div class="selectedSub" style='position:relative'></div>
+				<div class="crudTask" style='position:relative'></div>
+			</div>
+		</div>
+		<div class ="style_clear"></div>
+	</div>
+	<div  class='app_cal_crudTask popup style_displayTable style_hidden' style='background-color:white;position:fixed;left:0px;top:0px;padding:5px'>
+		Name: <input type='text' class='name' style='width:200px'/>  <input type='checkbox' class='allDay'/>all day<br/>
+		Start: <input type='text' class='startDate' style='width:100px'/> &nbsp; 
+		<span class='startTimeContainer'><select class='startTime'></select></span><br/>
+
+		Duration: <input type='text' class='durationDays' style='width:30px'/>  days
+		<input type='text' class='durationHrs' style='width:30px'/> hours 
+		<input type='text' class='durationMins' style='width:30px'/> minutes<br/>
+		&nbsp;&nbsp;(Or end: <input type='text' class='endDate' style='width:100px'/> 
+		<span class='endTimeContainer' >
+			&nbsp;
+			<select class='endTime'></select>
+			<span style='margin-left:40px'></span>
+		</span>
+		)
+		<br/>
+		
+		Description	<br/>
+		<textarea rows='4' cols='50' class='description' style='width:400px'></textarea> <br/>
+		<button class='save'>Save</button> 
+		<button class= 'cancel'>Cancel</button> 
+		<button class= 'delete'>Delete</button> 
+	</div>
+	
+	<div class="app_myAccount style_displayTable style_hidden" style="text-align:center;margin:30px auto 0 auto">
+		<table style='display:inline-table'>
+			<tr>
+				<td>Username :</td>
+				<td><span class = 'username'></span>
+			</tr>
+			<tr>
+				<td>First name : </td>
+				<td><input type='text' class = 'firstName'></td>
+			</tr>
+			<tr>
+				<td>Last name : </td>
+				<td><input type='text' class = 'lastName'></td>
+			</tr>
+			<tr>
+				<td>*Email :</td>
+				<td><input type='text' class = 'email'></td>
+			</tr>
+			<tr>
+				<td>Password :</td>
+				<td><input type='password' class = 'password'></td>
+			</tr>
+			<tr>
+				<td>Retype password :</td>
+				<td><input type='password' class = 'repeatPassword'></td>
+			</tr>
+			<tr>
+				<td>Information changed? </td>
+				<td style='text-align:right;'><button class='submit'>Update</button></td>
+			</tr>
+			<tr>
+				<td>Account not needed anymore? </td>
+				<td style='text-align:right;'><button class='delete'>Delete</button></td>
+			</tr>
+		</table>
+		
+		
+		
+	</div>
+	<div class="app_login style_displayTable style_hidden" style="text-align:center;margin:30px auto 0 auto" >
+	<br/>
+	<b><a  href ="#" class='demoLogin'>Log in</a> as a demo user </b><br/><br/>
+	or<br/><br/>
+	Log in with an existing account: <br/>
+		<table style='display:inline-table'>
+			<tr>
+				<td>Username :</td>
+				<td><input type='text' class='username'/></td>
+			</tr>
+			<tr>
+				<td>Password :</td>
+				<td><input type='password' class='password'/></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td style='text-align:right;'><button class='submit'>Log In</button></td>
+			</tr>
+		</table>
+		<br/>
+		or<br/><br/>
+		<a  href ="#" class='createAccount'>Create</a> an account <br/><br/><br/>
+		<div style='width:400px;text-align:justify;'>
+		
+		
+		</div>
+	</div>
+	
+	<div class="app_createAccount style_displayTable style_hidden" style='text-align:center;margin:30px auto 0 auto'>
+		<table style='display:inline-table'>
+			<tr>
+				<td>*Username :</td>
+				<td><input type='text' class = 'username'></td>
+			</tr>
+			<tr>
+				<td>First name : </td>
+				<td><input type='text' class = 'firstName'></td>
+			</tr>
+			<tr>
+				<td>Last name : </td>
+				<td><input type='text' class = 'lastName'></td>
+			</tr>
+			<tr>
+				<td>*Email :</td>
+				<td><input type='text' class = 'email'></td>
+			</tr>
+			<tr>
+				<td>*Password :</td>
+				<td><input type='password' class = 'password'></td>
+			</tr>
+			<tr>
+				<td>*Retype password :</td>
+				<td><input type='password' class = 'repeatPassword'></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td style='text-align:right;'><button class='submit'>Create</button></td>
+			</tr>
+		</table>
+		
+		<br/>
+		Back to 
+		<a href='#' class='login'>Log In</a> <br/>
+	</div>
+
+	<script src="../lib/jquery.js"></script>
+	<script src="../lib/jquery-ui.js"></script>
+	<script src="../lib/jquery-ui-custom.js"></script>
+	<script src="../lib/jquery.ui.touch-punch.js"></script>
+	<script src="../lib/tmaSetup.js"></script>
+
+	<script src="js/common/common.js" ></script>
+	
+	<script src="js/controllers/app_cal_crudTask.js" ></script>
+	<script src="js/controllers/app_cal_month.js"></script>
+	<script src="js/controllers/app_cal_week.js"></script>
+	<script src="js/controllers/app_cal.js"></script>
+	<script src="js/controllers/app_createAccount.js"></script>
+	<script src="js/controllers/app_login.js"></script>
+	<script src="js/controllers/app_myAccount.js"></script>
+	<script src="js/controllers/app_navbar.js"></script>
+	<script src="js/controllers/app_message.js"></script>
+	<script src="js/controllers/app.js"></script>
+	<script> 
+	tma.app.load();
+	</script>
+	
+</body>
+</html>
